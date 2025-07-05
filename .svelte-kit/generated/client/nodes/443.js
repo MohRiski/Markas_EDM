@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/dashboard/keuangan/bukti_fisik/E3.2/+page.svelte";

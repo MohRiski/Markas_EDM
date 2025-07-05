@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/dashboard/kepala/bukti_fisik/_cetak/A1.2/XII/+page.svelte";

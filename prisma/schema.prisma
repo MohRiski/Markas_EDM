@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model profile_sekolah {
+  id_profile_sekolah Int @id @default(autoincrement())
+  nama               String @db.VarChar(150)
+  npsn               String @db.VarChar(100)
+  alamat             String @db.Text
+  akreditasi         Akreditasi
+  jenjang_pendidikan Jenjang
+  status_pendidikan  Stapen
+  kepala             String? @db.VarChar(150)
+  ttd_kepala         String? @db.VarChar(255)
+  logo               String? @db.VarChar(255)
+
+  tahun_akademik     tahun_akademik[]
+}
+enum Akreditasi {
+  A
+  B
+  C
+  D
+}
+enum Jenjang {
+  MA
+  MTS
+  MI
+}
+enum Stapen {
+  Swasta
+  Negeri
+}
+
+model tahun_akademik {
+  id_tahun_akademik   Int @id @default(autoincrement())
+  id_profile_sekolah  Int
+  tahun               Int
+  status              Status
+
+  input_bukti_fisik     input_bukti_fisik[]
+  profile_sekolah         profile_sekolah? @relation(fields: [id_profile_sekolah], references: [id_profile_sekolah], onDelete: Restrict, onUpdate: Cascade)
+}
+enum Status {
+  Aktif
+  Tidak_Aktif
+}
+
+model pengguna {
+  id_pengguna     Int @id @default(autoincrement())
+  username        String @db.VarChar(100)
+  email           String @db.VarChar(100)
+  password        String @db.VarChar(100)
+  jenis_kelamin   Jk
+  tanggal_lahir   DateTime @db.Date
+  alamat          String @db.Text
+  no_hp           String @db.VarChar(20)
+  foto            String? @db.VarChar(255)
+
+  hak_akses_pengguna  hak_akses_pengguna[]
+  input_bukti_fisik   input_bukti_fisik[]
+}
+enum Jk {
+  Laki_Laki
+  Perempuan
+}
+
+model hak_akses {
+  id_hak_akses  Int @id @default(autoincrement())
+  nama          String @db.VarChar(100)
+
+  hak_akses_pengguna  hak_akses_pengguna[]
+  penugasan_operator  penugasan_operator[]
+}
+
+model hak_akses_pengguna {
+  id_hak_akses_pengguna   Int @id @default(autoincrement())
+  id_pengguna             Int
+  id_hak_akses            Int
+
+  pengguna                pengguna? @relation(fields: [id_pengguna], references: [id_pengguna], onDelete: Restrict, onUpdate: Cascade)
+  hak_akses               hak_akses? @relation(fields: [id_hak_akses], references: [id_hak_akses], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model penugasan_operator {
+  id_penugasan_operator Int @id @default(autoincrement())
+  id_hak_akses          Int
+  id_bukti_fisik        Int
+
+  hak_akses             hak_akses? @relation(fields: [id_hak_akses], references: [id_hak_akses], onDelete: Restrict, onUpdate: Cascade)
+  bukti_fisik           bukti_fisik? @relation(fields: [id_bukti_fisik], references: [id_bukti_fisik], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model indikator {
+  id_indikator  Int @id @default(autoincrement())
+  kode          String @db.VarChar(10)
+  keterangan    String @db.Text
+
+  bukti_fisik   bukti_fisik[]
+}
+
+model bukti_fisik {
+  id_bukti_fisik    Int @id @default(autoincrement())
+  id_indikator      Int
+  kode              String @db.VarChar(10)
+  keterangan        String @db.Text
+  required          Boolean @default(true)
+
+  input_bukti_fisik     input_bukti_fisik[]
+  penugasan_operator    penugasan_operator[]
+  indikator         indikator? @relation(fields: [id_indikator], references: [id_indikator], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model input_bukti_fisik {
+  id_input_bukti_fisik    Int @id @default(autoincrement())
+  id_operator             Int  
+  id_bukti_fisik          Int
+  id_tahun_akademik       Int
+  status                  Stasik
+  kunci                   Boolean @default(false)
+  tanggal_input           DateTime @default(now())
+  catatan                 String? @db.Text
+
+  jawaban_bukti_fisik     jawaban_bukti_fisik[]
+  pengguna                pengguna? @relation(fields: [id_operator], references: [id_pengguna], onDelete: Restrict, onUpdate: Cascade)
+  bukti_fisik           bukti_fisik? @relation(fields: [id_bukti_fisik], references: [id_bukti_fisik], onDelete: Restrict, onUpdate: Cascade)
+  tahun_akademik        tahun_akademik? @relation(fields: [id_tahun_akademik], references: [id_tahun_akademik], onDelete: Restrict, onUpdate: Cascade)
+}
+enum Stasik {
+  Belum_dikerjakan
+  Menunggu_validasi
+  Diterima
+  Ditolak
+}
+
+model jawaban_bukti_fisik {
+  id_jawaban            Int @id @default(autoincrement())
+  id_input_bukti_fisik  Int
+
+  detail_jawaban        detail_jawaban[]
+  input_bukti_fisik     input_bukti_fisik? @relation(fields: [id_input_bukti_fisik], references: [id_input_bukti_fisik], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model detail_jawaban {
+  id_detail_jawaban   Int @id @default(autoincrement())
+  id_jawaban          Int
+  atribut             String @db.VarChar(100)
+  nilai               String @db.Text
+
+  jawaban_bukti_fisik jawaban_bukti_fisik? @relation(fields: [id_jawaban], references: [id_jawaban], onDelete: Restrict, onUpdate: Cascade)
+}

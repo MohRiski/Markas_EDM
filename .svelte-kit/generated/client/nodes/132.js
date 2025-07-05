@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/dashboard/kepala/bukti_fisik/_cetak/A6.3 copy/Mgmp/+page.svelte";

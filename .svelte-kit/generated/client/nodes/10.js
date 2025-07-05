@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/dashboard/admin/hak_akses_pengguna/+page.svelte";
