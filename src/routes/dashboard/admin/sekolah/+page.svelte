@@ -81,7 +81,21 @@
                         method: "POST",
                         body: formData
                     });
+                } else if (!logo) {
+                    const formDataa = new FormData();
+                    formDataa.append('ttd', ttd);
+                    const res = await fetch (`/api/profile_sekolah/ttd?id=${id}`,{
+                        method: "POST",
+                        body: formDataa
+                    });
                 } else {
+                    const formData = new FormData();
+                    formData.append('logo', logo);
+                    const respon = await fetch (`/api/profile_sekolah/gambar?id=${id}`,{
+                        method: "POST",
+                        body: formData
+                    });
+                    
                     const formDataa = new FormData();
                     formDataa.append('ttd', ttd);
                     const res = await fetch (`/api/profile_sekolah/ttd?id=${id}`,{
@@ -154,7 +168,21 @@
                         method: "POST",
                         body: formData
                     });
+                } else if (!logo) {
+                    const formDataa = new FormData();
+                    formDataa.append('ttd', ttd);
+                    const res = await fetch (`/api/profile_sekolah/ttd?id=${data.data.id_profile_sekolah}`,{
+                        method: "POST",
+                        body: formDataa
+                    });
                 } else {
+                    const formData = new FormData();
+                    formData.append('logo', logo);
+                    const respon = await fetch (`/api/profile_sekolah/gambar?id=${data.data.id_profile_sekolah}`,{
+                        method: "POST",
+                        body: formData
+                    });
+
                     const formDataa = new FormData();
                     formDataa.append('ttd', ttd);
                     const res = await fetch (`/api/profile_sekolah/ttd?id=${data.data.id_profile_sekolah}`,{
