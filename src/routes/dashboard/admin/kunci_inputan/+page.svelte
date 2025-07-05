@@ -17,6 +17,7 @@
     }
 
     let bukti_fisik: any[] = [];
+    let cek_bukti_fisik: any[] = [];
     let semua_bukti: any[] = [];
     let all_bukti_fisik: any[] = [];
     async function dataBuktiFisik() {
@@ -35,6 +36,8 @@
                 return tanggal.getFullYear() === year;
             })
         );
+
+        cek_bukti_fisik = res.data.filter((item: any) =>item.input_bukti_fisik.length > 0);
 
         all_bukti_fisik = filtered;
         bukti_fisik = filtered;
@@ -138,7 +141,6 @@
                 indikatorDiterima.push(kode);
             }
         }
-        console.log(indikatorDiterima);
     }
 
     function semuaSudahTerkunci(indikator: string): boolean {
@@ -234,7 +236,7 @@
             </select>
         </div>
         <div class="">
-            <select bind:value={filter} class="w-[120px] border px-3 rounded-md text-[12px]">
+            <select bind:value={filter} class="w-[120px] border px-3 rounded-md text-[12px]" disabled={cek_bukti_fisik.length !== 70}>
                 <option value="">-- Filter --</option>
                 <option value="bukti">Bukti Fisik</option>
                 <option value="indikator">Indikator</option>
