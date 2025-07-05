@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
     import Swal from "sweetalert2";
 
-    let jumlahData = 1;
+    let jumlahData = ;
     type JDItem = {
         file: string | File | null;
         keterangan : string;
