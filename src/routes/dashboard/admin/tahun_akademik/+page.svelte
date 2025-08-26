@@ -99,7 +99,7 @@
         } else {
             Swal.fire({
                 title: "Gagal!",
-                text: "Edit data gagal dilakukan",
+                text: "Edit data gagal dilakukan tahun akademik sudah ada",
                 icon: "error",
                 timer: 3000,
                 background: "#8B0000",
@@ -145,7 +145,7 @@
         } else {
             Swal.fire({
                 title: "Gagal!",
-                text: "Data gagal ditambah",
+                text: "Data gagal ditambah tahun akademik sudah ada",
                 icon: "error",
                 timer: 3000,
                 background: "#8B0000",

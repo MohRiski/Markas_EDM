@@ -84,7 +84,7 @@
         } else {
             Swal.fire({
                 title: "Gagal!",
-                text: "Edit data gagal dilakukan",
+                text: "Hak akses sudah ada data gagal di edit",
                 icon: "error",
                 timer: 3000,
                 background: "#8B0000",
@@ -128,7 +128,7 @@
         } else {
             Swal.fire({
                 title: "Gagal!",
-                text: "Data gagal ditambah",
+                text: "Data gagal ditambah hak akses sudah ada",
                 icon: "error",
                 timer: 3000,
                 background: "#8B0000",

@@ -88,7 +88,7 @@
                     <div class="w-24 h-24 rounded-full bg-white">
                         <img src={`/images/${foto}`} alt="foto" class="rounded-full w-24 h-24">
                     </div>
-                    <p class="font-bold">{username}</p>
+                    <p class="font-bold text-center">{username}</p>
                     <p class="text-sm text-gray-600">Operator Keuangan</p>
                 </div>
                 <nav class="space-y-3 text-[13px] font-semibold">

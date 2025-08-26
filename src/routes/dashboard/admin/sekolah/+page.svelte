@@ -304,7 +304,7 @@
         <!-- Logo -->
         <div class="flex items-center justify-center w-full md:w-1/3 bg-gray-100 rounded-lg p-6">
             <div class="w-40 h-40 rounded-xl bg-white flex items-center justify-center text-center font-bold text-gray-500">
-            <img src={`/images/${logoo}`} alt="logo">
+                <img src={`/images/${logoo}`} alt="logo">
             </div>
         </div>
         </div>

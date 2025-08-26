@@ -43,26 +43,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 		throw redirect(302, routeMap[role] ?? '/dashboard');
 	}
 
-	if (isLoggedIn) {
-		const role = user.hak_akses[0];
-		if (role === 'Admin Madrasah') {
-			if (isDashboardPageKepala || isDashboardPageKesiswaan || isDashboardPageKeuangan) {
-				throw redirect(302, '/dashboard/admin');
-			}
-		} else if (role === 'Kepala Madrasah') {
-			if (isDashboardPageAdmin || isDashboardPageKesiswaan || isDashboardPageKeuangan) {
-				throw redirect(302, '/dashboard/kepala');
-			}
-		} else if (role === 'Operator Kesiswaan') {
-			if (isDashboardPageKepala || isDashboardPageAdmin || isDashboardPageKeuangan) {
-				throw redirect(302, '/dashboard/kesiswaan');
-			}
-		} else if (role === 'Operator Keuangan') {
-			if (isDashboardPageKepala || isDashboardPageKesiswaan || isDashboardPageAdmin) {
-				throw redirect(302, '/dashboard/keuangan');
-			}
-		}
-	}
+	// if (isLoggedIn) {
+	// 	const role = user.hak_akses[0];
+	// 	if (role === 'Admin Madrasah') {
+	// 		if (isDashboardPageKepala || isDashboardPageKesiswaan || isDashboardPageKeuangan) {
+	// 			throw redirect(302, '/dashboard/admin');
+	// 		}
+	// 	} else if (role === 'Kepala Madrasah') {
+	// 		if (isDashboardPageAdmin || isDashboardPageKesiswaan || isDashboardPageKeuangan) {
+	// 			throw redirect(302, '/dashboard/kepala');
+	// 		}
+	// 	} else if (role === 'Operator Kesiswaan') {
+	// 		if (isDashboardPageKepala || isDashboardPageAdmin || isDashboardPageKeuangan) {
+	// 			throw redirect(302, '/dashboard/kesiswaan');
+	// 		}
+	// 	} else if (role === 'Operator Keuangan') {
+	// 		if (isDashboardPageKepala || isDashboardPageKesiswaan || isDashboardPageAdmin) {
+	// 			throw redirect(302, '/dashboard/keuangan');
+	// 		}
+	// 	}
+	// }
 
 	return resolve(event);
 };

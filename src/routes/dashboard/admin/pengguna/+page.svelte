@@ -132,7 +132,7 @@
                     } else {
                         Swal.fire({
                             title: "Gagal!",
-                            text: "Edit data gagal dilakukan",
+                            text: "Email sudah digunakan",
                             icon: "error",
                             timer: 3000,
                             background: "#8B0000",
@@ -170,7 +170,7 @@
                     } else {
                         Swal.fire({
                             title: "Gagal!",
-                            text: "Edit data gagal dilakukan",
+                            text: "Email sudah digunakan",
                             icon: "error",
                             timer: 3000,
                             background: "#8B0000",
@@ -216,7 +216,7 @@
                     } else {
                         Swal.fire({
                             title: "Gagal!",
-                            text: "Edit data gagal dilakukan",
+                            text: "Email sudah digunakan",
                             icon: "error",
                             timer: 3000,
                             background: "#8B0000",
@@ -260,7 +260,7 @@
                     } else {
                         Swal.fire({
                             title: "Gagal!",
-                            text: "Edit data gagal dilakukan",
+                            text: "Email sudah digunakan",
                             icon: "error",
                             timer: 3000,
                             background: "#8B0000",
@@ -358,7 +358,7 @@
             } else {
                 Swal.fire({
                     title: "Gagal!",
-                    text: "Data gagal ditambah",
+                    text: "Email sudah digunakan",
                     icon: "error",
                     timer: 3000,
                     background: "#8B0000",

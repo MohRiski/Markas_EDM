@@ -85,6 +85,27 @@ export async function PUT({request, url}: RequestEvent) {
             }, { status: 400 });
         }
 
+        const exist1 = await prisma.bukti_fisik.findFirst({
+            where: {
+                AND: [
+                {
+                    kode: kode
+                },
+                {
+                    NOT: {
+                        id_bukti_fisik: parseInt(id)
+                    }
+                }
+            ]
+        }
+        });
+        if (exist1) {
+            return json({
+                status: false,
+                message: "Bukti fisik sudah ada"
+            }, {status: 400});
+        }
+
         const response = await prisma.bukti_fisik.update({
             where: {
                 id_bukti_fisik: parseInt(id)

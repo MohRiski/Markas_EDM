@@ -79,6 +79,27 @@ export async function PUT({request, url}: RequestEvent) {
             }, { status: 400 });
         }
 
+        const exist1 = await prisma.tahun_akademik.findFirst({
+            where: {
+                AND: [
+                    {
+                        tahun: tahun
+                    },
+                    {
+                        NOT: {
+                            id_tahun_akademik: parseInt(id)
+                        }
+                    }
+                ]
+            }
+        });
+        if (exist1) {
+            return json({
+                status: false,
+                message: "Tahun akademik sudah ada"
+            }, {status: 400});
+        }
+
         const response = await prisma.tahun_akademik.update({
             where: {
                 id_tahun_akademik: parseInt(id)

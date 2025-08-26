@@ -79,6 +79,25 @@ export async function PUT({request, url}: RequestEvent) {
             }, { status: 400 });
         }
 
+        const exist1 = await prisma.indikator.findFirst({
+            where: {AND: [
+                {
+                    kode: kode
+                },
+                {
+                    NOT: {
+                        id_indikator: parseInt(id)
+                    }
+                }
+            ]}
+        });
+        if (exist1) {
+            return json({
+                status: false,
+                message: "Indikator sudah ada"
+            }, {status: 400});
+        }
+
         const response = await prisma.indikator.update({
             where: {
                 id_indikator: parseInt(id)

@@ -78,6 +78,26 @@ export async function PUT({request, url}: RequestEvent) {
                 message: "Data Tidak Ditemukan",
             }, { status: 400 });
         }
+
+        const exist1 = await prisma.hak_akses.findFirst({
+            where: {AND: [
+                {
+                    nama: nama
+                },
+                {
+                    NOT: {
+                        id_hak_akses: parseInt(id)
+                    }
+                }
+            ]}
+        });
+        if (exist1) {
+            return json({
+                status: false,
+                message: "Hak akses sudah ada"
+            }, {status: 400});
+        }
+        
         const response = await prisma.hak_akses.update({
             where: {
                 id_hak_akses: parseInt(id)

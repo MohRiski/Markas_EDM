@@ -33,18 +33,6 @@
 			credentials: "include"
 		});
 		if (response.ok) {
-			Swal.fire({
-				title: "Login Sukses!",
-				text: "Selamat beraktivitas",
-				icon: "success",
-				timer: 3000,
-				background: "#28a745",
-				color: "#ffffff",
-				allowOutsideClick: true,
-				showConfirmButton: false,
-				toast: true,
-				position: "top-end",
-			});
 			await new Promise(resolve => setTimeout(resolve, 1000));
 			const res = await fetch("/api/me", {
 				method: "GET",
@@ -55,15 +43,63 @@
 				const role = result.user.hak_akses[0];
 				switch (role) {
 					case "Admin Madrasah":
+						Swal.fire({
+							title: "Login Sukses!",
+							text: "Selamat beraktivitas",
+							icon: "success",
+							timer: 3000,
+							background: "#28a745",
+							color: "#ffffff",
+							allowOutsideClick: true,
+							showConfirmButton: false,
+							toast: true,
+							position: "top-end",
+						});
 						goto("/dashboard/admin");
 						break;
 					case "Kepala Madrasah":
+						Swal.fire({
+							title: "Login Sukses!",
+							text: "Selamat beraktivitas",
+							icon: "success",
+							timer: 3000,
+							background: "#28a745",
+							color: "#ffffff",
+							allowOutsideClick: true,
+							showConfirmButton: false,
+							toast: true,
+							position: "top-end",
+						});
 						goto("/dashboard/kepala");
 						break;
 					case "Operator Kesiswaan":
+						Swal.fire({
+							title: "Login Sukses!",
+							text: "Selamat beraktivitas",
+							icon: "success",
+							timer: 3000,
+							background: "#28a745",
+							color: "#ffffff",
+							allowOutsideClick: true,
+							showConfirmButton: false,
+							toast: true,
+							position: "top-end",
+						});
 						goto("/dashboard/kesiswaan");
 						break;
 					case "Operator Keuangan":
+						Swal.fire({
+							title: "Login Sukses!",
+							text: "Selamat beraktivitas",
+							icon: "success",
+							timer: 3000,
+							background: "#28a745",
+							color: "#ffffff",
+							allowOutsideClick: true,
+							showConfirmButton: false,
+							toast: true,
+							position: "top-end",
+						});
 						goto("/dashboard/keuangan");
 						break;
 					default:

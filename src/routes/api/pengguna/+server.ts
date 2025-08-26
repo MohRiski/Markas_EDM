@@ -91,6 +91,25 @@ export async function PUT({request, url}: RequestEvent) {
                 message: "Data Tidak Ditemukan",
             }, { status: 400 });
         }
+
+        const exist1 = await prisma.pengguna.findFirst({
+            where: {AND: [
+                {
+                    email: email
+                },
+                {
+                    NOT: {
+                        id_pengguna: parseInt(id)
+                    }
+                }
+            ]}
+        });
+        if (exist1) {
+            return json({
+                status: false,
+                message: "Email sudah di gunakan"
+            }, {status: 400});
+        }
         
         const hashPass = bcrypt.hashSync(password, 10);
         const newDate = new Date(tanggal_lahir);
